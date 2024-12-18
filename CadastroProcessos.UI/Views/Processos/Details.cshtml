@@ -1,0 +1,78 @@
+﻿@model CadastroDeProcessos.Domain.Entities.Processo
+
+@{
+    ViewData["Title"] = "Detalhes do Processo";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="fw-bold text-primary">@ViewData["Title"]</h2>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="mb-3">Informações do Processo</h4>
+            <dl class="row">
+                <dt class="col-sm-3 fw-bold">
+                    <i class="fas fa-file-alt"></i> Nome do Processo
+                </dt>
+                <dd class="col-sm-9">@Model.NomeProcesso</dd>
+
+                <dt class="col-sm-3 fw-bold">
+                    <i class="fas fa-hashtag"></i> NPU
+                </dt>
+                <dd class="col-sm-9">@Model.NPU</dd>
+
+                <dt class="col-sm-3 fw-bold">
+                    <i class="fas fa-calendar-alt"></i> Data de Cadastro
+                </dt>
+                <dd class="col-sm-9">@Model.DataCadastro.ToString("dd/MM/yyyy")</dd>
+
+                <dt class="col-sm-3 fw-bold">
+                    <i class="fas fa-eye"></i> Data de Visualização
+                </dt>
+                <dd class="col-sm-9">
+                    @if (Model.DataVisualizacao.HasValue)
+                    {
+                        @Model.DataVisualizacao.Value.ToString("dd/MM/yyyy HH:mm")
+                    }
+                    else
+                    {
+                        <span class="text-danger">Ainda não visualizado</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-3 fw-bold">
+                    <i class="fas fa-map-marker-alt"></i> UF
+                </dt>
+                <dd class="col-sm-9">@Model.UF</dd>
+
+                <dt class="col-sm-3 fw-bold">
+                    <i class="fas fa-city"></i> Município
+                </dt>
+                <dd class="col-sm-9">@Model.Municipio</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-between">
+            <form asp-action="ConfirmarVisualizacao" method="post" class="d-inline">
+                <input type="hidden" asp-for="Id" />
+                @if (!Model.DataVisualizacao.HasValue)
+                {
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i> Confirmar Visualização
+                    </button>
+                }
+            </form>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+    </div>
+</div>

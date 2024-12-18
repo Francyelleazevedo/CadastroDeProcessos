@@ -1,0 +1,19 @@
+﻿@model CadastroDeProcessos.Web.Models.ErrorViewModel
+
+<h1>Erro</h1>
+<p>@Model.ErrorMessage</p>
+
+@if (Model.Exception != null)
+{
+    <div>
+        <h3>Detalhes do Erro:</h3>
+        <pre>@Model.Exception.ToString()</pre>
+    </div>
+}
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>ID da Requisição:</strong> <code>@Model.RequestId</code>
+    </p>
+}
